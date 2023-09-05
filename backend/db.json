@@ -1,0 +1,28 @@
+{
+  "pensamentos": [
+    {
+      "id": 0,
+      "conteudo": "O que sabemos é uma gota, o que ignoramos é um oceano.",
+      "autoria": "Isaac Newton",
+      "modelo": "modelo1"
+    },
+    {
+      "id": 1,
+      "conteudo": "A mente que se abre a uma nova ideia jamais voltará ao seu tamanho original.",
+      "autoria": "Albert Einstein",
+      "modelo": "modelo3"
+    },
+    {
+      "id": 2,
+      "conteudo": "Não tenha medo da mudança. Coisas boas se vão para que outras melhores possam vir.",
+      "autoria": "Autor desconhecido ;-;",
+      "modelo": "modelo2"
+    },
+    {
+      "id": 3,
+      "conteudo": "Só sei que nada sei!",
+      "autoria": "Sócrates",
+      "modelo": "modelo1"
+    }
+  ]
+}

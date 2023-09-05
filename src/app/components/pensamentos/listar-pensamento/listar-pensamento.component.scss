@@ -1,0 +1,54 @@
+.mural {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 2rem;
+  justify-content: center;
+  margin: 1rem 0 2rem;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding-bottom: 100px;
+  padding-top: 50px;
+}
+
+.botao {
+  margin: 5px;
+  margin-top: 30px;
+  width: 200px;
+  background-color: #154580;
+  padding: 15px;
+  color: white;
+  border-radius: 8px;
+  border: none;
+  &:hover {
+    background-color: #324aff;
+  }
+  &:active {
+    background-color: rgb(37, 0, 171);
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  h2 {
+    color: #054ea8;
+    text-align: center;
+    font-size: 34px;
+  }
+}
+.d-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sem-pensamentos {
+  text-align: center;
+  padding: 2rem 0 5rem;
+}
