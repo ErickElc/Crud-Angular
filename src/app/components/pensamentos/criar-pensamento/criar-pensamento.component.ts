@@ -1,7 +1,13 @@
 import { PensamentoService } from './../pensamento.service';
 import { Component, OnInit } from '@angular/core';
 import { Pensamento } from '../../pensamento/pensamento';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-criar-pensamento',
@@ -9,18 +15,32 @@ import { Router, RouterLink } from '@angular/router';
   styleUrls: ['./criar-pensamento.component.scss'],
 })
 export class CriarPensamentoComponent implements OnInit {
-  pensamento: Pensamento = {
-    id: 0,
-    conteudo: '',
-    autoria: '',
-    modelo: '',
-  };
-  constructor(private service: PensamentoService, private router: Router) {}
+  formulario!: FormGroup;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private service: PensamentoService,
+    private router: Router
+  ) {}
+
+  lowercaseValidator(control: AbstractControl) {
+    const value = control.value;
+    if (value !== value.toLowerCase()) {
+      return { lowercase: true };
+    }
+    return null;
+  }
+
   criarPensamento() {
-    this.service.createPensamento(this.pensamento).subscribe((_) => {
-      alert('Pensamento criado com sucesso!');
-      this.router.navigate(['/']);
-    });
+    console.log(this.formulario.get('autoria')?.errors);
+    if (this.formulario.valid) {
+      this.service.createPensamento(this.formulario.value).subscribe((_) => {
+        alert('Pensamento criado com sucesso!');
+        this.router.navigate(['/']);
+      });
+    } else {
+      alert('Escreva tudo');
+    }
   }
 
   cancelarPensamento() {
@@ -28,5 +48,38 @@ export class CriarPensamentoComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  ngOnInit(): void {}
+  habilitarBotao(): string {
+    console.log(this.formulario.valid);
+    if (this.formulario.valid) {
+      return 'botao';
+    }
+    return 'botao__desabilitado';
+  }
+
+  ngOnInit(): void {
+    this.formulario = this.formBuilder.group({
+      conteudo: [
+        '',
+        [
+          Validators.compose([
+            Validators.required,
+            Validators.pattern(/(.|\s)*\S(.|\s)*/),
+            Validators.minLength(3),
+          ]),
+        ],
+      ],
+      autoria: [
+        '',
+        [
+          Validators.compose([
+            Validators.required,
+            Validators.pattern(/(.|\s)*\S(.|\s)*/),
+            Validators.minLength(3),
+            // this.lowercaseValidator,
+          ]),
+        ],
+      ],
+      modelo: ['modelo1'],
+    });
+  }
 }
